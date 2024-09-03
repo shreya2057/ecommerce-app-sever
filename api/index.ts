@@ -14,7 +14,7 @@ dotenv.config();
 mongodb_connection();
 
 const CSS_URL =
-  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.0.1/swagger-ui.min.css";
+  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
 
 app.get("/", (_, res) => {
   res.send("Server is running");
