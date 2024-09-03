@@ -13,6 +13,7 @@ export const options = {
     servers: [
       {
         url: process.env.swagger_staging_url,
+        description: "Ecommerce Server",
       },
     ],
   },

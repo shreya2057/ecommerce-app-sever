@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsx api/index.ts",
-    "dev": "tsx api/index.ts",
-    "server": "tsx api/index.ts",
+    "start": "nodemon api/index.ts",
+    "dev": "nodemon api/index.ts",
+    "server": "nodemon api/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,6 +24,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "mongoose": "^8.6.0",
+    "nodemon": "^3.1.4",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.6.2"
   },
