@@ -6,6 +6,7 @@ import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { options } from "./config/swagger";
 import categories_routes from "./routes/categories_routes";
+import product_routes from "./routes/products_routes";
 import bodyParser from "body-parser";
 
 const app = express();
@@ -36,6 +37,7 @@ app.use(
 );
 
 app.use("/categories", categories_routes);
+app.use("/products", product_routes);
 
 app.listen(port, () => {
   console.log(`Backend: Running in port ${port}`);
