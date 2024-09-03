@@ -11,7 +11,7 @@ dotenv.config();
 mongodb_connection();
 
 app.get("/", (_, res) => {
-  res.send("Hello");
+  res.send("Server is running");
 });
 
 app.listen(port, () => {
