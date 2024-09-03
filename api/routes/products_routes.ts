@@ -1,6 +1,6 @@
 import { Router } from "express";
+import { upload } from "../config/mutler";
 import { post_products } from "../controller/products_controller";
-import { uploadImage } from "../middleware/image_upload";
 
 const router = Router();
 
@@ -8,7 +8,9 @@ const router = Router();
  * @swagger
  * /products/add-products/{category_id}:
  *   post:
- *     summary: Upload an Image
+ *     tags:
+ *      - Products
+ *     summary: Add a Product
  *     parameters:
  *       - in: path
  *         name: category_id
@@ -42,6 +44,10 @@ const router = Router();
  *         description: Image uploaded successfully
  */
 
-router.post("/add-products/:category_id", uploadImage, post_products);
+router.post(
+  "/add-products/:category_id",
+  upload.single("image"),
+  post_products
+);
 
 export default router;

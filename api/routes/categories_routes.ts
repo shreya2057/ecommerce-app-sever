@@ -9,6 +9,8 @@ import {
  * @swagger
  * /categories/get-categories/:
  *   get:
+ *     tags:
+ *      - Categories
  *     summary: Get Categories
  *     responses:
  *       200:
@@ -19,7 +21,9 @@ import {
  * @swagger
  * /categories/add-categories/:
  *   post:
- *     summary: Add Categories
+ *     tags:
+ *      - Categories
+ *     summary: Add a Category
  *     requestBody:
  *       content:
  *         application/json:
