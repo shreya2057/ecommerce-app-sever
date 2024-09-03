@@ -40,6 +40,7 @@ const post_products = async (req: Request, res: Response) => {
       });
     }
   } catch (e) {
+    console.log(e);
     res.json({ message: "Internal server error", status: 500 });
   }
 };
