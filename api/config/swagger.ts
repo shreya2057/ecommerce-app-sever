@@ -12,7 +12,7 @@ export const options = {
     },
     servers: [
       {
-        url: "http://localhost:8000",
+        url: process.env.swagger_staging_url,
       },
     ],
   },
