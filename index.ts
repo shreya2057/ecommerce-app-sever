@@ -10,6 +10,10 @@ dotenv.config();
 
 mongodb_connection();
 
+app.get("/", (_, res) => {
+  res.send("Hello");
+});
+
 app.listen(port, () => {
   console.log(`Backend: Running in port ${port}`);
   console.log(`Front-end:  http://localhost:${port}/`);
