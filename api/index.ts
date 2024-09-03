@@ -5,10 +5,13 @@ import dotenv from "dotenv";
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { options } from "./config/swagger";
+import categories_routes from "./routes/categories_routes";
+import bodyParser from "body-parser";
 
 const app = express();
 const port = 8000;
 app.use(cors());
+app.use(bodyParser.json());
 dotenv.config();
 
 mongodb_connection();
@@ -31,6 +34,8 @@ app.use(
     customCssUrl: CSS_URL,
   })
 );
+
+app.use("/categories", categories_routes);
 
 app.listen(port, () => {
   console.log(`Backend: Running in port ${port}`);

@@ -12,10 +12,17 @@ export const options = {
     },
     servers: [
       {
-        url: process.env.swagger_staging_url,
+        url: "http://localhost:8000/",
         description: "Ecommerce Server",
       },
     ],
   },
-  apis: ["./routes/*.ts"],
+  paths: {
+    "/": {
+      get: {
+        description: "Returns 'Hello <name>/stranger!!!' to the call",
+      },
+    },
+  },
+  apis: ["api/routes/*.ts"],
 };
