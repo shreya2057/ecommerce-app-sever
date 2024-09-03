@@ -12,7 +12,7 @@ export const options = {
     },
     servers: [
       {
-        url: "http://localhost:8000/",
+        url: "https://shreya-ecommerce-server.vercel.app/",
         description: "Ecommerce Server",
       },
     ],
