@@ -4,27 +4,20 @@ import cloudinary from "../config/cloudinary";
 import { Categories } from "../model/categories";
 import mongoose from "mongoose";
 
-const get_all_products = async (req: Request, res: Response) => {
+const get_products = async (req: Request, res: Response) => {
   try {
-    const request = await Product.find({
-      $or: [{ title: { $regex: req?.query?.title ?? "", $options: "i" } }],
-    });
-    res.json({
-      message: "Products data fetch successfully",
-      status: 200,
-      data: request,
-    });
-  } catch (e) {
-    console.log(e);
-    res.json({ message: "Internal server error", status: 500 });
-  }
-};
-
-const get_categorywise_products = async (req: Request, res: Response) => {
-  try {
-    const request = await Product.find({
-      category: req.params.category_id,
-    });
+    const request = await Product.find(
+      !!req?.query &&
+        (!!req?.query?.title
+          ? {
+              $or: [
+                { title: { $regex: req?.query?.title ?? "", $options: "i" } },
+              ],
+            }
+          : {
+              category_id: req?.query?.category_id,
+            })
+    );
     res.json({
       message: "Products data fetch successfully",
       status: 200,
@@ -55,7 +48,8 @@ const post_products = async (req: Request, res: Response) => {
       const request = new Product({
         ...req?.body,
         image: cloudinaryResult?.secure_url,
-        category: req.params.category_id,
+        category_id: req.params.category_id,
+        category_name: findCategory?.name,
       });
 
       await request.save();
@@ -75,4 +69,4 @@ const post_products = async (req: Request, res: Response) => {
   }
 };
 
-export { post_products, get_categorywise_products, get_all_products };
+export { post_products, get_products };
