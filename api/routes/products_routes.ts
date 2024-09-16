@@ -64,7 +64,7 @@ const router = Router();
  *                 required: true
  *     responses:
  *       200:
- *         description: Image uploaded successfully
+ *         description: Products added successfully
  */
 
 router.get("/get-products/", get_products);
