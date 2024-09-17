@@ -8,3 +8,9 @@ export type UserRegistrationType = {
   confirm_password?: string;
   is_verified?: boolean;
 };
+
+export type OTPType = {
+  email: string;
+  otp: string;
+  createdAt: Date;
+};

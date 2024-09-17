@@ -1,6 +1,12 @@
 import { Router } from "express";
-import { registration_controller } from "../controller/auth_controller";
-import { registration_validation } from "../middleware/registration_validation";
+import {
+  otp_send_controller,
+  registration_controller,
+} from "../controller/auth_controller";
+import {
+  otp_validation,
+  registration_validation,
+} from "../middleware/registration_validation";
 
 /**
  * @swagger
@@ -37,8 +43,29 @@ import { registration_validation } from "../middleware/registration_validation";
  *         description: A successful response
  */
 
+/**
+ * @swagger
+ * /users/send-otp/:
+ *   post:
+ *     tags:
+ *      - Users
+ *     summary: Send OTP
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 required: true
+ *     responses:
+ *       200:
+ *         description: A successful response
+ */
+
 const router = Router();
 
 router.post("/registration/", registration_validation, registration_controller);
+router.post("/send-otp/", otp_validation, otp_send_controller);
 
 export default router;
