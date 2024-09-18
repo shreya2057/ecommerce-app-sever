@@ -12,5 +12,5 @@ export type UserRegistrationType = {
 export type OTPType = {
   email: string;
   otp: string;
-  createdAt: Date;
+  createdAt?: Date;
 };
