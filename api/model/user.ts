@@ -29,6 +29,9 @@ const user_schema = new mongoose.Schema<UserRegistrationType>({
   is_verified: {
     type: Boolean,
   },
+  role: {
+    type: String,
+  },
 });
 
 export const User = mongoose.model("user", user_schema);

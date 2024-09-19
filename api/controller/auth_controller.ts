@@ -6,7 +6,11 @@ import { User } from "../model/user";
 
 export const registration_controller = async (req: Request, res: Response) => {
   try {
-    const request = new User({ ...req?.body, is_verified: false });
+    const request = new User({
+      ...req?.body,
+      is_verified: false,
+      role: "student",
+    });
     await request.save();
     res.json({
       message: "User created successfully",

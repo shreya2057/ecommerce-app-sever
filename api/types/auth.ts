@@ -7,6 +7,7 @@ export type UserRegistrationType = {
   password: string;
   confirm_password?: string;
   is_verified?: boolean;
+  role?: string;
 };
 
 export type OTPType = {
