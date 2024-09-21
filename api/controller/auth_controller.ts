@@ -3,13 +3,14 @@ import Mail from "nodemailer/lib/mailer";
 import { transport } from "../config/nodemailer";
 import { OTP } from "../model/otp";
 import { User } from "../model/user";
+import randomstring from "randomstring";
 
 export const registration_controller = async (req: Request, res: Response) => {
   try {
     const request = new User({
       ...req?.body,
       is_verified: false,
-      role: "student",
+      role: "customer",
     });
     await request.save();
     res.json({
@@ -29,7 +30,10 @@ export const otp_send_controller = async (req: Request, res: Response) => {
       res.json({ message: "OTP already sent", status: 400 });
       return;
     } else {
-      const otp = "34558";
+      const otp = randomstring.generate({
+        length: 6,
+        charset: "numeric",
+      });
       const request = new OTP({ ...req?.body, otp, createdAt: new Date() });
       const mailOptions: Mail.Options = {
         from: process.env.user_email,
@@ -40,7 +44,7 @@ export const otp_send_controller = async (req: Request, res: Response) => {
           <html lang="en">
             <body>
                 <p style="font-weight: bold;">Hello!</p>
-                <p>Please user OTP to verify your account:</p>
+                <p>Please use OTP to verify your account:</p>
                 <p style="font-size: 20px; font-weight: bold;">${otp}</p>
                 <p>Note: Please do not share your otp with anyone.</p>
             </body>
@@ -56,5 +60,29 @@ export const otp_send_controller = async (req: Request, res: Response) => {
       message: "Internal server error",
       status: 500,
     });
+  }
+};
+
+export const otp_verify_controller = async (req: Request, res: Response) => {
+  try {
+    const otpExists = await OTP.exists({
+      otp: req?.body?.otp,
+      email: req?.body?.email,
+    });
+    if (otpExists) {
+      await User.findOneAndUpdate(
+        { email: req?.body?.email },
+        { is_verified: true }
+      );
+      await OTP.findOneAndDelete({
+        email: req?.body?.email,
+        otp: req?.body?.otp,
+      });
+      res.json({ message: "Account successfully verified", status: 200 });
+    } else {
+      res.json({ message: "Otp expired", status: 400 });
+    }
+  } catch (e) {
+    res.json({ message: "Internal server error", status: 500 });
   }
 };
