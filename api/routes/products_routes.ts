@@ -1,6 +1,10 @@
 import { Router } from "express";
 import { upload } from "../config/mutler";
-import { get_products, post_products } from "../controller/products_controller";
+import {
+  get_featured_products,
+  get_products,
+  post_products,
+} from "../controller/products_controller";
 
 const router = Router();
 
@@ -62,6 +66,21 @@ const router = Router();
  *               description:
  *                 type: string
  *                 required: true
+ *               is_featured:
+ *                 type: string
+ *                 required: true
+ *     responses:
+ *       200:
+ *         description: A successful response
+ */
+
+/**
+ * @swagger
+ * /products/featured-products/:
+ *   get:
+ *     tags:
+ *      - Products
+ *     summary: Featured Products
  *     responses:
  *       200:
  *         description: A successful response
@@ -74,5 +93,7 @@ router.post(
   upload.single("image"),
   post_products
 );
+
+router.get("/featured-products/", get_featured_products);
 
 export default router;

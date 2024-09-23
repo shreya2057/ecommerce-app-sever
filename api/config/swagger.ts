@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 export const options = {
   definition: {
     openapi: "3.1.0",
@@ -12,7 +15,7 @@ export const options = {
     },
     servers: [
       {
-        url: "https://shreya-ecommerce-server.vercel.app/",
+        url: process.env.swagger_staging_url,
         description: "Ecommerce Server",
       },
     ],

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { Product } from "../model/products";
+import mongoose from "mongoose";
 import cloudinary from "../config/cloudinary";
 import { Categories } from "../model/categories";
-import mongoose from "mongoose";
+import { Product } from "../model/products";
 
 const get_products = async (req: Request, res: Response) => {
   try {
@@ -69,4 +69,17 @@ const post_products = async (req: Request, res: Response) => {
   }
 };
 
-export { post_products, get_products };
+export const get_featured_products = async (_: Request, res: Response) => {
+  try {
+    const request = await Product.find({ is_featured: true });
+    res.json({
+      message: "Featured product data fetch successfully",
+      data: request,
+      status: 500,
+    });
+  } catch (e) {
+    res.json({ message: "Internal server error", status: 500 });
+  }
+};
+
+export { get_products, post_products };
