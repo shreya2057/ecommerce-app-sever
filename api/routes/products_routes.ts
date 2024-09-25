@@ -3,6 +3,7 @@ import { upload } from "../config/mutler";
 import {
   get_featured_products,
   get_products,
+  get_products_details,
   post_products,
 } from "../controller/products_controller";
 
@@ -86,6 +87,24 @@ const router = Router();
  *         description: A successful response
  */
 
+/**
+ * @swagger
+ * /products/product-detail/{id}/:
+ *   get:
+ *     tags:
+ *      - Products
+ *     summary: Get Product detail
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         description: The product id
+ *     responses:
+ *       200:
+ *         description: A successful response
+ */
+
 router.get("/get-products/", get_products);
 
 router.post(
@@ -95,5 +114,6 @@ router.post(
 );
 
 router.get("/featured-products/", get_featured_products);
+router.get("/product-detail/:id/", get_products_details);
 
 export default router;

@@ -69,7 +69,7 @@ const post_products = async (req: Request, res: Response) => {
   }
 };
 
-export const get_featured_products = async (_: Request, res: Response) => {
+const get_featured_products = async (_: Request, res: Response) => {
   try {
     const request = await Product.find({ is_featured: true });
     res.json({
@@ -82,4 +82,27 @@ export const get_featured_products = async (_: Request, res: Response) => {
   }
 };
 
-export { get_products, post_products };
+const get_products_details = async (req: Request, res: Response) => {
+  try {
+    const productExists = await Product.exists({ _id: req?.params?.id });
+    if (productExists) {
+      const productDetail = await Product.findOne({ _id: req?.params?.id });
+      res.json({
+        message: "Product detail fetched successfully",
+        status: 200,
+        data: productDetail,
+      });
+    } else {
+      res.json({ message: "Product instance not found", status: 400 });
+    }
+  } catch (e) {
+    res.json({ message: "Internal server error", status: 500 });
+  }
+};
+
+export {
+  get_products,
+  post_products,
+  get_featured_products,
+  get_products_details,
+};
