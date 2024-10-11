@@ -113,7 +113,6 @@ export const login_controller = async (req: Request, res: Response) => {
       },
     });
   } catch (e) {
-    console.log(e);
-    res.json({ message: "Internal server error", status: 500, error: e });
+    res.json({ message: "Internal server error", status: 500 });
   }
 };
