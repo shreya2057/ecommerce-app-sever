@@ -4,11 +4,16 @@ import { transport } from "../config/nodemailer";
 import { OTP } from "../model/otp";
 import { User } from "../model/user";
 import randomstring from "randomstring";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 export const registration_controller = async (req: Request, res: Response) => {
   try {
+    const saltRounds = 10;
+    const password = await bcrypt.hash(req?.body?.password, saltRounds);
     const request = new User({
       ...req?.body,
+      password,
       is_verified: false,
       role: "customer",
     });
@@ -82,6 +87,31 @@ export const otp_verify_controller = async (req: Request, res: Response) => {
     } else {
       res.json({ message: "Otp expired", status: 400 });
     }
+  } catch (e) {
+    res.json({ message: "Internal server error", status: 500 });
+  }
+};
+
+export const login_controller = async (req: Request, res: Response) => {
+  try {
+    const access_key = process.env.access_secretKey ?? "";
+    const refresh_key = process.env.refresh_secretKey ?? "";
+
+    const access_token = jwt.sign({ ...req?.body }, access_key, {
+      expiresIn: 60 * 7,
+    });
+
+    const refresh_token = jwt.sign({ ...req?.body }, refresh_key, {
+      expiresIn: 60 * 60,
+    });
+    res.json({
+      message: "Logged in successfully",
+      status: 200,
+      data: {
+        access_token,
+        refresh_token,
+      },
+    });
   } catch (e) {
     res.json({ message: "Internal server error", status: 500 });
   }
