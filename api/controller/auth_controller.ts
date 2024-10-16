@@ -104,7 +104,7 @@ export const login_controller = async (req: Request, res: Response) => {
     const refresh_token = jwt.sign({ ...req?.body }, refresh_key, {
       expiresIn: 60 * 60,
     });
-    res.json({
+    res.status(200).json({
       message: "Logged in successfully",
       status: 200,
       data: {
@@ -113,6 +113,6 @@ export const login_controller = async (req: Request, res: Response) => {
       },
     });
   } catch (e) {
-    res.json({ message: "Internal server error", status: 500 });
+    res.status(500).json({ message: "Internal server error", status: 500 });
   }
 };

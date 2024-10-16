@@ -18,15 +18,17 @@ export const login_validation = async (
         if (passwordMatch) {
           next();
         } else {
-          res.json({ message: "Password did not match", status: 400 });
+          res
+            .status(400)
+            .json({ message: "Password did not match", status: 400 });
         }
       } else {
-        res.json({ message: "User is not verified", status: 403 });
+        res.status(403).json({ message: "User is not verified", status: 403 });
       }
     } else {
-      res.json({ message: "User does not exist", status: 400 });
+      res.status(400).json({ message: "User does not exist", status: 400 });
     }
   } catch (e) {
-    res.json({ message: "Internal server error", status: 500 });
+    res.status(500).json({ message: "Internal server error", status: 500 });
   }
 };
