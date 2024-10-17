@@ -1,6 +1,5 @@
 import { Router } from "express";
 import {
-  login_controller,
   otp_send_controller,
   otp_verify_controller,
   registration_controller,
@@ -10,6 +9,7 @@ import {
   registration_validation,
 } from "../middleware/registration_validation";
 import { login_validation } from "../middleware/login_validation";
+import { login_controller } from "../controller/auth/login";
 
 /**
  * @swagger

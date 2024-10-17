@@ -4,7 +4,6 @@ import { transport } from "../config/nodemailer";
 import { OTP } from "../model/otp";
 import { User } from "../model/user";
 import randomstring from "randomstring";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 export const registration_controller = async (req: Request, res: Response) => {
@@ -89,30 +88,5 @@ export const otp_verify_controller = async (req: Request, res: Response) => {
     }
   } catch (e) {
     res.json({ message: "Internal server error", status: 500 });
-  }
-};
-
-export const login_controller = async (req: Request, res: Response) => {
-  try {
-    const access_key = process.env.access_secretKey ?? "";
-    const refresh_key = process.env.refresh_secretKey ?? "";
-
-    const access_token = jwt.sign({ ...req?.body }, access_key, {
-      expiresIn: 60 * 7,
-    });
-
-    const refresh_token = jwt.sign({ ...req?.body }, refresh_key, {
-      expiresIn: 60 * 60,
-    });
-    res.status(200).json({
-      message: "Logged in successfully",
-      status: 200,
-      data: {
-        access_token,
-        refresh_token,
-      },
-    });
-  } catch (e) {
-    res.status(500).json({ message: "Internal server error", status: 500 });
   }
 };

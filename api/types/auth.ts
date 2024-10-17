@@ -15,3 +15,8 @@ export type OTPType = {
   otp: string;
   createdAt?: Date;
 };
+
+export type UserLoginType = {
+  email: string;
+  password: string;
+};
