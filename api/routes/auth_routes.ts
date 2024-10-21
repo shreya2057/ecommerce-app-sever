@@ -2,14 +2,10 @@ import { Router } from "express";
 import {
   otp_send_controller,
   otp_verify_controller,
-  registration_controller,
 } from "../controller/auth_controller";
-import {
-  otp_validation,
-  registration_validation,
-} from "../middleware/registration_validation";
-import { login_validation } from "../middleware/login_validation";
-import { login_controller } from "../controller/auth/login";
+import { otp_validation } from "../middleware/registration_validation";
+import { login_validation, register_validation } from "../middleware/auth";
+import { register_controller, login_controller } from "../controller/auth";
 
 /**
  * @swagger
@@ -114,7 +110,7 @@ import { login_controller } from "../controller/auth/login";
 
 const router = Router();
 
-router.post("/registration/", registration_validation, registration_controller);
+router.post("/registration/", register_validation, register_controller);
 router.post("/send-otp/", otp_validation, otp_send_controller);
 router.post("/verify-otp/", otp_validation, otp_verify_controller);
 router.post("/login", login_validation, login_controller);

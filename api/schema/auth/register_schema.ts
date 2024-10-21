@@ -1,7 +1,7 @@
 import Joi from "joi";
-import { UserRegistrationType } from "../types/auth";
+import { UserRegistrationType } from "../../types/auth";
 
-export const authSchema = Joi.object<UserRegistrationType>({
+export const registerSchema = Joi.object<UserRegistrationType>({
   full_name: Joi.string()
     .required()
     .pattern(/^(?:\S+\s+){1,}\S+$/, "contains at least two words")
