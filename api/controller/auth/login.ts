@@ -15,7 +15,7 @@ export const login_controller = async (req: Request, res: Response) => {
     // Password match check
     const passwordMatch = bcrypt.compare(req.body?.password, user?.password);
     if (!passwordMatch)
-      return sendResponse(res, "Incorrect user credentials", 400);
+      return sendResponse(res, "Incorrect user credentials", 401);
 
     // Token generation
     const access_key = process.env.access_secretKey ?? "";

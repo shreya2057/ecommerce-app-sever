@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { OTPType } from "../types/auth";
+import { OTPType } from "../../types/auth";
 
 export const otp_schema = Joi.object<OTPType>({
   email: Joi.string()
