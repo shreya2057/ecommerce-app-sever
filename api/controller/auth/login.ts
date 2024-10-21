@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { errorResponse, sendResponse } from "../../utils/response";
-import { User } from "../../model/user";
+import { User } from "../../model/auth";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 

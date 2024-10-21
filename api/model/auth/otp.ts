@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { OTPType } from "../types/auth";
+import { OTPType } from "../../types/auth";
 
 const otp_schema = new mongoose.Schema<OTPType>({
   email: { type: String, required: true },

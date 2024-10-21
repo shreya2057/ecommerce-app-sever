@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import randomstring from "randomstring";
 import { transport } from "../../config/nodemailer";
-import { OTP } from "../../model/otp";
-import { User } from "../../model/user";
+import { OTP, User } from "../../model/auth";
 import { generateOTPMail } from "../../utils/generateOTPMail";
 import { errorResponse, sendResponse } from "../../utils/response";
 

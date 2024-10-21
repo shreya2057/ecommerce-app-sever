@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { UserRegistrationType } from "../types/auth";
+import { UserRegistrationType } from "../../types/auth";
 
 const user_schema = new mongoose.Schema<UserRegistrationType>({
   full_name: {
