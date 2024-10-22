@@ -4,7 +4,7 @@ import { OTPType } from "../../types/auth";
 const otp_schema = new mongoose.Schema<OTPType>({
   email: { type: String, required: true },
   otp: { type: String, required: true },
-  createdAt: { type: Date, required: true, expires: 60 * 3 },
+  createdAt: { type: Date, required: true, expires: 60 * 2.5 },
 });
 
 export const OTP = mongoose.model("OTP", otp_schema);
