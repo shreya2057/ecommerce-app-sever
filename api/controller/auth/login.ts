@@ -8,7 +8,7 @@ export const login_controller = async (req: Request, res: Response) => {
   try {
     const user = await User.findOne({ email: req.body?.email });
 
-    if (!user) return sendResponse(res, "User does not exits", 400);
+    if (!user) return sendResponse(res, "User does not exists", 400);
     if (!user?.is_verified)
       return sendResponse(res, "User is not verified", 403);
 
