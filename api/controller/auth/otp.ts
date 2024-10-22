@@ -31,11 +31,14 @@ export const otp_verify_controller = async (req: Request, res: Response) => {
     const emailExits = await User.exists({ email: req?.body?.email });
     if (!emailExits) return sendResponse(res, "User not found", 400);
 
-    const otpExists = await OTP.exists({
-      otp: req?.body?.otp,
+    const otpExists = await OTP.findOne({
       email: req?.body?.email,
     });
+
     if (!otpExists) return sendResponse(res, "Otp expired", 400);
+
+    if (otpExists?.otp !== req?.body?.otp)
+      return sendResponse(res, "Otp did not match", 400);
 
     await User.findOneAndUpdate(
       { email: req?.body?.email },
