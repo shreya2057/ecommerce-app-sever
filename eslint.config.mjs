@@ -13,7 +13,7 @@ export default [
       "no-return-assign": "error",
       "no-unused-expressions": ["error", { allowTernary: true }],
       "no-constant-condition": "warn",
-      "no-unused-vars": ["warn", { argsIgnorePattern: "req|res|next|__" }],
+      "no-unused-vars": ["error", { argsIgnorePattern: "req|res|next|__" }],
       "no-mixed-spaces-and-tabs": "warn",
       "space-in-parens": "error",
       "space-infix-ops": "error",
