@@ -7,9 +7,9 @@ export const loginSchema = Joi.object<UserLoginType>({
     .required()
     .messages({
       "string.empty": "Email cannot be empty",
-      "string.email": "Email is not valid",
+      "string.email": "Email is not valid"
     }),
   password: Joi.string().required().messages({
-    "string.empty": "password cannot be empty",
-  }),
+    "string.empty": "password cannot be empty"
+  })
 });

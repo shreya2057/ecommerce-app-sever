@@ -7,7 +7,7 @@ export const otp_schema = Joi.object<OTPType>({
     .required()
     .messages({
       "string.empty": "Email cannot be empty",
-      "string.email": "Email is not valid",
+      "string.email": "Email is not valid"
     }),
-  otp: Joi.string(),
+  otp: Joi.string()
 });

@@ -2,7 +2,7 @@ import Mail from "nodemailer/lib/mailer";
 
 export const generateOTPMail = ({
   email,
-  otp,
+  otp
 }: {
   email: string;
   otp: string;
@@ -21,7 +21,7 @@ export const generateOTPMail = ({
             <p>Note: Please do not share your otp with anyone.</p>
         </body>
       </html>
-    `,
+    `
   };
 
   return mailOptions;

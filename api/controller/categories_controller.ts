@@ -8,9 +8,10 @@ const add_categories = async (req: Request, res: Response) => {
     res.json({
       message: "Categories created Successfully",
       status: 200,
-      data: request,
+      data: request
     });
   } catch (e) {
+    console.log(e);
     res.json({ message: "Internal server error", status: 500 });
   }
 };
@@ -21,9 +22,10 @@ const get_categories = async (_: Request, res: Response) => {
     res.json({
       message: "Categories data fetch successfully",
       status: 200,
-      data: response,
+      data: response
     });
   } catch (e) {
+    console.log(e);
     res.json({ message: "Internal server error", status: 500 });
   }
 };

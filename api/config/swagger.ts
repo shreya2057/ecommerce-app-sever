@@ -10,22 +10,22 @@ export const options = {
       description: "Ecommerce Application Server",
       license: {
         name: "MIT",
-        url: "https://spdx.org/licenses/MIT.html",
-      },
+        url: "https://spdx.org/licenses/MIT.html"
+      }
     },
     servers: [
       {
         url: process.env.swagger_staging_url,
-        description: "Ecommerce Server",
-      },
-    ],
+        description: "Ecommerce Server"
+      }
+    ]
   },
   paths: {
     "/": {
       get: {
-        description: "Returns 'Hello <name>/stranger!!!' to the call",
-      },
-    },
+        description: "Returns 'Hello <name>/stranger!!!' to the call"
+      }
+    }
   },
-  apis: ["api/routes/*.ts"],
+  apis: ["api/routes/*.ts"]
 };

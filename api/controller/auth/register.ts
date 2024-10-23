@@ -15,12 +15,12 @@ export const register_controller = async (req: Request, res: Response) => {
       ...req?.body,
       password,
       is_verified: false,
-      role: "customer",
+      role: "customer"
     });
 
     await request.save();
     return sendResponse(res, "User created successfully", 200, {
-      email: request?.email,
+      email: request?.email
     });
   } catch (e) {
     console.log(e);

@@ -2,7 +2,7 @@ import { Router } from "express";
 import { categories_validation } from "../middleware/categories_validation";
 import {
   add_categories,
-  get_categories,
+  get_categories
 } from "../controller/categories_controller";
 
 /**

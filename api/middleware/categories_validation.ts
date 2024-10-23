@@ -6,10 +6,10 @@ export const categories_validation = (
   next: () => void
 ) => {
   const request = req?.body;
-  if (!!!request) {
+  if (!request) {
     res.json({ message: "All fields cannot be null", status: 400 });
   }
-  if (!!!request.name) {
+  if (!request.name) {
     res.json({ message: "Category name cannot be null", status: 400 });
   }
   next();

@@ -1,4 +1,3 @@
-import { required } from "joi";
 import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
@@ -9,7 +8,7 @@ const productSchema = new mongoose.Schema({
   discount: { type: String, required: true },
   category_id: { type: String, required: true },
   category_name: { type: String, required: true },
-  is_featured: { type: Boolean, required: true },
+  is_featured: { type: Boolean, required: true }
 });
 
 export const Product = mongoose.model("Product", productSchema);

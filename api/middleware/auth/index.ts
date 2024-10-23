@@ -45,7 +45,7 @@ export const otp_validation = async (
   if (request.error) {
     res.json({
       message: request?.error?.details?.map((detail) => detail.message),
-      status: 400,
+      status: 400
     });
   } else {
     next();

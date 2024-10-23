@@ -32,7 +32,7 @@ export const otp_verify_controller = async (req: Request, res: Response) => {
     if (!emailExits) return sendResponse(res, "User not found", 400);
 
     const otpExists = await OTP.findOne({
-      email: req?.body?.email,
+      email: req?.body?.email
     });
 
     if (!otpExists) return sendResponse(res, "Otp expired", 400);
@@ -46,7 +46,7 @@ export const otp_verify_controller = async (req: Request, res: Response) => {
     );
     await OTP.findOneAndDelete({
       email: req?.body?.email,
-      otp: req?.body?.otp,
+      otp: req?.body?.otp
     });
     sendResponse(res, "Account successfully verified", 200);
   } catch (e) {

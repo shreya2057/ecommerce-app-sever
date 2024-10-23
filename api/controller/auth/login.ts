@@ -25,19 +25,19 @@ export const login_controller = async (req: Request, res: Response) => {
       email: user?.email,
       id: user?._id,
       name: user?.full_name,
-      role: user?.role,
+      role: user?.role
     };
 
     const access_token = jwt.sign(tokenDetails, access_key, {
-      expiresIn: 60 * 7,
+      expiresIn: 60 * 7
     });
     const refresh_token = jwt.sign(tokenDetails, refresh_key, {
-      expiresIn: 60 * 7,
+      expiresIn: 60 * 7
     });
 
     sendResponse(res, "Logged in Successfully", 200, {
       access_token,
-      refresh_token,
+      refresh_token
     });
   } catch (e) {
     console.log(e);

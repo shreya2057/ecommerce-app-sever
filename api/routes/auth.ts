@@ -2,13 +2,13 @@ import { Router } from "express";
 import {
   login_validation,
   otp_validation,
-  register_validation,
+  register_validation
 } from "../middleware/auth";
 import {
   login_controller,
   otp_send_controller,
   otp_verify_controller,
-  register_controller,
+  register_controller
 } from "../controller/auth";
 
 /**
