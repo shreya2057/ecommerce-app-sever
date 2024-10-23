@@ -10,7 +10,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write .",
     "lint": "eslint . ",
-    "lint:fix": "eslint . --fix "
+    "lint:fix": "eslint . --fix ",
+    "prepare": "husky",
+    "precommit": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -54,6 +56,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "globals": "^15.11.0",
+    "husky": "^9.1.6",
     "prettier": "^3.3.3",
     "typescript-eslint": "^8.11.0"
   }
