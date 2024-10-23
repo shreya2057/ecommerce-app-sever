@@ -1,11 +1,12 @@
 #!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
+. "$(dirname -- "$0")/_/h"
+
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m'
 echo "${GREEN}- - - - - - - - - - - - - - - - - - - - - - - - - - - -${NC}"
 echo "${GREEN}Compiling TYPESCRIPT: :rocket: :bulb: ${NC}"
-pnpm tsc --noEmit || {
+npm run tsc --noEmit || {
     echo "${RED} TYPESCRIPT Compile failed: :rotating_light: :clown_face: :rotating_light:  ${NC}"
     exit 1
 }
@@ -18,7 +19,7 @@ if [ "$OSTYPE" == "msys" ]; then
 fi
 echo "${GREEN}- - - - - - - - - - - - - - - - - - - - - - - - - - - -${NC}"
 echo "${GREEN}Linting files: :truck: :memo: ${NC}"
-pnpm lint-staged || {
+npm run lint-staged || {
     echo "${RED}Linting failed: :fire: :clown_face::hankey: :fire: ${NC}"
     exit 1
 }
