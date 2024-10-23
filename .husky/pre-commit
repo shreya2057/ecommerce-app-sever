@@ -1,23 +1,37 @@
+#!/bin/bash
+
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m'
-echo "${GREEN}- - - - - - - - - - - - - - - - - - - - - - - - - - - -${NC}"
-echo "${GREEN}Compiling TYPESCRIPT ${NC}"
+
+log() {
+echo -e "$1"
+}
+
+log "${GREEN}- - - - - - - - - - - - - - - - - - - - - - - - - - - -${NC}"
+log "${GREEN}Compiling TYPESCRIPT ${NC}"
+
 npm run tsc --noEmit || {
-echo "${RED} TYPESCRIPT Compile failed ${NC}"
+log "${RED}TYPESCRIPT Compile failed ${NC}"
 exit 1
 }
-echo "${GREEN}Compile success ${NC}"
-echo "${GREEN}- - - - - - - - - - - - - - - - - - - - - - - - - - - -${NC}"
+
+log "${GREEN}Compile success ${NC}"
+log "${GREEN}- - - - - - - - - - - - - - - - - - - - - - - - - - - -${NC}"
 
 if [ "$OSTYPE" == "msys" ]; then
 exec >/dev/console 2>&1
 fi
-echo "${GREEN}- - - - - - - - - - - - - - - - - - - - - - - - - - - -${NC}"
-echo "${GREEN}Linting files ${NC}"
+
+log "${GREEN}- - - - - - - - - - - - - - - - - - - - - - - - - - - -${NC}"
+log "${GREEN}Linting files ${NC}"
+
 npm run lint || {
-echo "${RED}Linting failed ${NC}"
+log "${RED}Linting failed ${NC}"
 exit 1
 }
-echo "${GREEN}Linting success ${NC}"
-echo "${GREEN}- - - - - - - - - - - - - - - - - - - - - - - - - - - -${NC}"npx lint-staged
+
+log "${GREEN}Linting success ${NC}"
+log "${GREEN}- - - - - - - - - - - - - - - - - - - - - - - - - - - -${NC}"
+
+log "${GREEN}Running lint-staged...${NC}"
