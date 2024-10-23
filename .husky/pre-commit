@@ -1,6 +1,3 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/h"
-
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m'
@@ -19,7 +16,7 @@ if [ "$OSTYPE" == "msys" ]; then
 fi
 echo "${GREEN}- - - - - - - - - - - - - - - - - - - - - - - - - - - -${NC}"
 echo "${GREEN}Linting files: :truck: :memo: ${NC}"
-npm run lint-staged || {
+npm run lint || {
     echo "${RED}Linting failed: :fire: :clown_face::hankey: :fire: ${NC}"
     exit 1
 }
