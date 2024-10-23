@@ -19,7 +19,7 @@ exit 1
 log "${GREEN}Compile success ${NC}"
 log "${GREEN}- - - - - - - - - - - - - - - - - - - - - - - - - - - -${NC}"
 
-if [ "$OSTYPE" == "msys" ]; then
+if [ "$OSTYPE" = "msys" ]; then
 exec >/dev/console 2>&1
 fi
 
