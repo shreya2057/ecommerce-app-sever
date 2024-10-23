@@ -1,6 +1,5 @@
 {
   "semi": true,
-  "printWidth": 80,
   "trailingComma": "none",
   "endOfLine": "lf"
 }

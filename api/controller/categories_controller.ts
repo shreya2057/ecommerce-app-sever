@@ -25,7 +25,7 @@ const get_categories = async (_: Request, res: Response) => {
       data: response
     });
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     res.json({ message: "Internal server error", status: 500 });
   }
 };

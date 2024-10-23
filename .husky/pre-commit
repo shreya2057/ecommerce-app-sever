@@ -2,23 +2,22 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m'
 echo "${GREEN}- - - - - - - - - - - - - - - - - - - - - - - - - - - -${NC}"
-echo "${GREEN}Compiling TYPESCRIPT: :rocket: :bulb: ${NC}"
+echo "${GREEN}Compiling TYPESCRIPT ${NC}"
 npm run tsc --noEmit || {
-    echo "${RED} TYPESCRIPT Compile failed: :rotating_light: :clown_face: :rotating_light:  ${NC}"
-    exit 1
+echo "${RED} TYPESCRIPT Compile failed ${NC}"
+exit 1
 }
-echo "${GREEN}Compile success: :white_check_mark: :money_with_wings: ${NC}"
+echo "${GREEN}Compile success ${NC}"
 echo "${GREEN}- - - - - - - - - - - - - - - - - - - - - - - - - - - -${NC}"
-# Running this command on windows to stop excessive output
-# https://github.com/okonet/lint-staged/issues/1164
+
 if [ "$OSTYPE" == "msys" ]; then
-    exec >/dev/console 2>&1
+exec >/dev/console 2>&1
 fi
 echo "${GREEN}- - - - - - - - - - - - - - - - - - - - - - - - - - - -${NC}"
-echo "${GREEN}Linting files: :truck: :memo: ${NC}"
+echo "${GREEN}Linting files ${NC}"
 npm run lint || {
-    echo "${RED}Linting failed: :fire: :clown_face::hankey: :fire: ${NC}"
-    exit 1
+echo "${RED}Linting failed ${NC}"
+exit 1
 }
-echo "${GREEN}Linting success: :beers: :tada: ${NC}"
+echo "${GREEN}Linting success ${NC}"
 echo "${GREEN}- - - - - - - - - - - - - - - - - - - - - - - - - - - -${NC}"npx lint-staged
