@@ -1,6 +1,5 @@
 #!/usr/bin/env sh
-. "$(dirname "$0")/h"
-
+. "$(dirname -- "$0")/_/husky.sh"
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m'
@@ -19,9 +18,9 @@ if [ "$OSTYPE" == "msys" ]; then
 fi
 echo "${GREEN}- - - - - - - - - - - - - - - - - - - - - - - - - - - -${NC}"
 echo "${GREEN}Linting files: :truck: :memo: ${NC}"
-npm run lint-staged || {
+pnpm lint-staged || {
     echo "${RED}Linting failed: :fire: :clown_face::hankey: :fire: ${NC}"
     exit 1
 }
 echo "${GREEN}Linting success: :beers: :tada: ${NC}"
-echo "${GREEN}- - - - - - - - - - - - - - - - - - - - - - - - - - - -${NC}npx lint-staged
+echo "${GREEN}- - - - - - - - - - - - - - - - - - - - - - - - - - - -${NC}"npx lint-staged
