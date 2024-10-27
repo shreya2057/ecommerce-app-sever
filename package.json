@@ -9,7 +9,7 @@
     "server": "nodemon api/index.ts",
     "typecheck": "tsc --noEmit",
     "lint": "eslint",
-    "format": "prettier --ignore-pattern .prettierignore --write \"**/*.+(js|ts|json|tsx|mdx)\" --log-level silent",
+    "format": "prettier --write .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -54,7 +54,7 @@
     "globals": "^15.11.0",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
-    "prettier": "3.3.3",
+    "prettier": "^3.3.3",
     "typescript-eslint": "^8.11.0"
   },
   "husky": {

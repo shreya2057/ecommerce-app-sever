@@ -16,7 +16,7 @@ const get_products = async (req: Request, res: Response) => {
             }
           : {
               category_id: req?.query?.category_id,
-            })
+            }),
     );
     res.json({
       message: "Products data fetch successfully",
@@ -33,11 +33,11 @@ const post_products = async (req: Request, res: Response) => {
   try {
     const cloudinaryResult = await cloudinary.uploader.upload(
       `data:${req?.file?.mimetype};base64,${req?.file?.buffer.toString(
-        "base64"
+        "base64",
       )}`,
       {
         folder: `category_${req.params.category_id}`,
-      }
+      },
     );
 
     const ObjectId = mongoose.Types.ObjectId;

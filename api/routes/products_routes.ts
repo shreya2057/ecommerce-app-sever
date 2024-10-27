@@ -110,7 +110,7 @@ router.get("/get-products/", get_products);
 router.post(
   "/add-products/:category_id",
   upload.single("image"),
-  post_products
+  post_products,
 );
 
 router.get("/featured-products/", get_featured_products);
