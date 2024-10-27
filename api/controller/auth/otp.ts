@@ -42,7 +42,7 @@ export const otp_verify_controller = async (req: Request, res: Response) => {
 
     await User.findOneAndUpdate(
       { email: req?.body?.email },
-      { is_verified: true }
+      { is_verified: true },
     );
     await OTP.findOneAndDelete({
       email: req?.body?.email,

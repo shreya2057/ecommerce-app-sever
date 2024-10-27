@@ -11,6 +11,7 @@ const add_categories = async (req: Request, res: Response) => {
       data: request,
     });
   } catch (e) {
+    console.log(e);
     res.json({ message: "Internal server error", status: 500 });
   }
 };
@@ -24,6 +25,7 @@ const get_categories = async (_: Request, res: Response) => {
       data: response,
     });
   } catch (e) {
+    console.log(e);
     res.json({ message: "Internal server error", status: 500 });
   }
 };

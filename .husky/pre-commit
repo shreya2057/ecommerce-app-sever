@@ -1,0 +1,5 @@
+# Run TypeScript compiler to check for errors
+npm run typecheck
+
+# Run lint-staged to lint the staged files
+npm run lint

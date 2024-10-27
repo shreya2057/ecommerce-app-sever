@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 export const categories_validation = (
   req: Request,
   res: Response,
-  next: () => void
+  next: () => void,
 ) => {
   const request = req?.body;
   if (!!!request) {

@@ -16,7 +16,7 @@ const get_products = async (req: Request, res: Response) => {
             }
           : {
               category_id: req?.query?.category_id,
-            })
+            }),
     );
     res.json({
       message: "Products data fetch successfully",
@@ -24,6 +24,7 @@ const get_products = async (req: Request, res: Response) => {
       data: request,
     });
   } catch (e) {
+    console.log(e);
     res.json({ message: "Internal server error", status: 500 });
   }
 };
@@ -32,11 +33,11 @@ const post_products = async (req: Request, res: Response) => {
   try {
     const cloudinaryResult = await cloudinary.uploader.upload(
       `data:${req?.file?.mimetype};base64,${req?.file?.buffer.toString(
-        "base64"
+        "base64",
       )}`,
       {
         folder: `category_${req.params.category_id}`,
-      }
+      },
     );
 
     const ObjectId = mongoose.Types.ObjectId;
@@ -65,6 +66,7 @@ const post_products = async (req: Request, res: Response) => {
       });
     }
   } catch (e) {
+    console.log(e);
     res.json({ message: "Internal server error", status: 500 });
   }
 };
@@ -78,6 +80,7 @@ const get_featured_products = async (_: Request, res: Response) => {
       status: 500,
     });
   } catch (e) {
+    console.log(e);
     res.json({ message: "Internal server error", status: 500 });
   }
 };
@@ -96,6 +99,7 @@ const get_products_details = async (req: Request, res: Response) => {
       res.json({ message: "Product instance not found", status: 400 });
     }
   } catch (e) {
+    console.log(e);
     res.json({ message: "Internal server error", status: 500 });
   }
 };

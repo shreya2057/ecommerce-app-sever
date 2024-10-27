@@ -4,7 +4,7 @@ export const sendResponse = (
   res: Response,
   message: string | string[],
   status: number,
-  data?: unknown
+  data?: unknown,
 ) => {
   return res.status(status).json({ message, status, data });
 };
