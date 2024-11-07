@@ -15,31 +15,37 @@ export const login_controller = async (req: Request, res: Response) => {
       return sendResponse(res, "Account has been suspended", 403);
 
     // Password match check
-    const passwordMatch = bcrypt.compare(req.body?.password, user?.password);
-    if (!passwordMatch)
-      return sendResponse(res, "Incorrect user credentials", 401);
+    bcrypt.compare(req.body?.password, user?.password, (error, data) => {
+      if (error) {
+        console.log(error);
+        return errorResponse(res);
+      }
+      if (data) {
+        // Token generation
+        const access_key = process.env.access_secretKey ?? "";
+        const refresh_key = process.env.refresh_secretKey ?? "";
 
-    // Token generation
-    const access_key = process.env.access_secretKey ?? "";
-    const refresh_key = process.env.refresh_secretKey ?? "";
+        const tokenDetails = {
+          email: user?.email,
+          id: user?._id,
+          name: user?.full_name,
+          role: user?.role,
+        };
 
-    const tokenDetails = {
-      email: user?.email,
-      id: user?._id,
-      name: user?.full_name,
-      role: user?.role,
-    };
+        const access_token = jwt.sign(tokenDetails, access_key, {
+          expiresIn: 60 * 7,
+        });
+        const refresh_token = jwt.sign(tokenDetails, refresh_key, {
+          expiresIn: 60 * 7,
+        });
 
-    const access_token = jwt.sign(tokenDetails, access_key, {
-      expiresIn: 60 * 7,
-    });
-    const refresh_token = jwt.sign(tokenDetails, refresh_key, {
-      expiresIn: 60 * 7,
-    });
-
-    sendResponse(res, "Logged in Successfully", 200, {
-      access_token,
-      refresh_token,
+        return sendResponse(res, "Logged in Successfully", 200, {
+          access_token,
+          refresh_token,
+        });
+      } else {
+        return sendResponse(res, "Incorrect user credentials", 401);
+      }
     });
   } catch (e) {
     console.log(e);
