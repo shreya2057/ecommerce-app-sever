@@ -15,6 +15,7 @@ export const register_controller = async (req: Request, res: Response) => {
       ...req?.body,
       password,
       is_verified: false,
+      is_active: false,
       role: "customer",
     });
 

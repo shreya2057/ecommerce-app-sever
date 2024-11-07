@@ -11,6 +11,8 @@ export const login_controller = async (req: Request, res: Response) => {
     if (!user) return sendResponse(res, "User does not exists", 400);
     if (!user?.is_verified)
       return sendResponse(res, "User is not verified", 403);
+    if (!user?.is_active)
+      return sendResponse(res, "Account has been suspended", 403);
 
     // Password match check
     const passwordMatch = bcrypt.compare(req.body?.password, user?.password);

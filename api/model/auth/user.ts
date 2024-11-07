@@ -29,6 +29,9 @@ const user_schema = new mongoose.Schema<UserRegistrationType>({
   is_verified: {
     type: Boolean,
   },
+  is_active: {
+    type: Boolean,
+  },
   role: {
     type: String,
   },

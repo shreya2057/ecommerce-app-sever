@@ -7,6 +7,7 @@ export type UserRegistrationType = {
   password: string;
   confirm_password?: string;
   is_verified?: boolean;
+  is_active?: boolean;
   role?: string;
 };
 
