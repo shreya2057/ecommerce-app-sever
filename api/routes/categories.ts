@@ -1,9 +1,6 @@
 import { Router } from "express";
-import { categories_validation } from "../middleware/categories_validation";
-import {
-  add_categories,
-  get_categories,
-} from "../controller/categories_controller";
+import { add_categories, get_categories } from "../controller/products";
+import { category_validation } from "../middleware/products";
 
 /**
  * @swagger
@@ -39,6 +36,6 @@ import {
 const router = Router();
 
 router.get("/get-categories/", get_categories);
-router.post("/add-categories/", categories_validation, add_categories);
+router.post("/add-categories/", category_validation, add_categories);
 
 export default router;

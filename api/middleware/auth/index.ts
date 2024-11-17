@@ -43,10 +43,11 @@ export const otp_validation = async (
 ) => {
   const request = otp_schema.validate(req?.body);
   if (request.error) {
-    res.json({
-      message: request?.error?.details?.map((detail) => detail.message),
-      status: 400,
-    });
+    return sendResponse(
+      res,
+      request?.error?.details?.map(({ message }) => message),
+      400,
+    );
   } else {
     next();
   }

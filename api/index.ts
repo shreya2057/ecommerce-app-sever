@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { options } from "./config/swagger";
-import categories_routes from "./routes/categories_routes";
+import categories_routes from "./routes/categories";
 import product_routes from "./routes/products_routes";
 import auth_routes from "./routes/auth";
 import bodyParser from "body-parser";

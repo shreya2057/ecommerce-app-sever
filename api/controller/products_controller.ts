@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import mongoose from "mongoose";
 import cloudinary from "../config/cloudinary";
-import { Categories } from "../model/categories";
+import { Categories } from "../model/products";
 import { Product } from "../model/products";
 
 const get_products = async (req: Request, res: Response) => {
