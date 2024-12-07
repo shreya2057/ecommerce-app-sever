@@ -73,9 +73,35 @@ const get_deleted_categories = async (_: Request, res: Response) => {
   }
 };
 
+const update_category = async (req: Request, res: Response) => {
+  try {
+    const categoryExists = await Categories.exists({
+      _id: req?.params?.id,
+      is_deleted: false,
+    });
+    if (!categoryExists)
+      return sendResponse(res, "Category id does not exist", 400);
+    const request = await Categories.findByIdAndUpdate(
+      { _id: req?.params?.id },
+      { ...req?.body },
+      { new: true, runValidators: false },
+    );
+    return sendResponse(res, "Category updated successfully", 200, request);
+  } catch (e) {
+    const err = e as Record<string, unknown>;
+    if ("code" in err && err.code === 11000) {
+      console.log(err);
+      return sendResponse(res, "Category name already exists", 400);
+    }
+    console.log(err);
+    return errorResponse(res);
+  }
+};
+
 export {
   add_categories,
   get_categories,
   get_all_categories,
   get_deleted_categories,
+  update_category,
 };
