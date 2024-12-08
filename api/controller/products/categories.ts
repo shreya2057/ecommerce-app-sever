@@ -102,7 +102,7 @@ const get_category_detail = async (req: Request, res: Response) => {
   try {
     const category = await Categories.findOne({
       _id: req?.params?.id,
-      is_active: true,
+      is_deleted: false,
     });
     if (!category) return sendResponse(res, "Category not found", 400);
     return sendResponse(
