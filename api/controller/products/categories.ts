@@ -98,10 +98,30 @@ const update_category = async (req: Request, res: Response) => {
   }
 };
 
+const get_category_detail = async (req: Request, res: Response) => {
+  try {
+    const category = await Categories.findOne({
+      _id: req?.params?.id,
+      is_active: true,
+    });
+    if (!category) return sendResponse(res, "Category not found", 400);
+    return sendResponse(
+      res,
+      "Category detail fetch successfully",
+      200,
+      category,
+    );
+  } catch (e) {
+    console.log(e);
+    return errorResponse(res);
+  }
+};
+
 export {
   add_categories,
   get_categories,
   get_all_categories,
   get_deleted_categories,
   update_category,
+  get_category_detail,
 };

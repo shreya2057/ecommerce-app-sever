@@ -3,6 +3,7 @@ import {
   add_categories,
   get_all_categories,
   get_categories,
+  get_category_detail,
   get_deleted_categories,
   update_category,
 } from "../controller/products";
@@ -72,7 +73,7 @@ import {
  *   patch:
  *     tags:
  *      - Categories
- *     summary: Update a category
+ *     summary: Get a category
  *     parameters:
  *       - in: path
  *         name: id
@@ -92,6 +93,25 @@ import {
  *         description: A successful response
  */
 
+/**
+ * @swagger
+ * /categories/get-category/{id}/:
+ *   get:
+ *     tags:
+ *      - Categories
+ *     summary: Update a category
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *           required: true
+ *         description: The category id
+ *     responses:
+ *       200:
+ *         description: A successful response
+ */
+
 const router = Router();
 
 router.get("/get-categories/", get_categories);
@@ -103,5 +123,6 @@ router.patch(
   category_update_validation,
   update_category,
 );
+router.get("/get-category/:id/", get_category_detail);
 
 export default router;
