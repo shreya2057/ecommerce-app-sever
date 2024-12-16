@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+import { ProductType } from "../../types/product";
 
-const productSchema = new mongoose.Schema({
+const productSchema = new mongoose.Schema<ProductType>({
   title: { type: String, required: true },
   price: { type: String, required: true },
   description: { type: String, required: true },

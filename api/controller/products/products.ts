@@ -32,8 +32,9 @@ const get_products = async (req: Request, res: Response) => {
 
 const get_category_products = async (req: Request, res: Response) => {
   try {
+    const ObjectId = mongoose.Types.ObjectId;
     const request = await Product.find({
-      category_id: req?.query?.category_id,
+      category_id: new ObjectId(req?.params?.category_id),
     });
     sendResponse(res, "Products data fetch successfully", 200, request);
   } catch (e) {
@@ -62,6 +63,7 @@ const post_products = async (req: Request, res: Response) => {
       ...req?.body,
       image: cloudinaryResult?.secure_url,
       category_id: new ObjectId(req.params.category_id),
+      is_featured: false,
     });
 
     await request.save();

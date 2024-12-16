@@ -35,13 +35,13 @@ const router = Router();
 
 /**
  * @swagger
- * /products/get-categories-products/{category_id}:
+ * /products/get-categories-products/{category_id}/:
  *   get:
  *     tags:
  *      - Products
  *     summary: Get Category wise Products
  *     parameters:
- *       - in: query
+ *       - in: path
  *         name: category_id
  *         required: true
  *         schema:
@@ -54,7 +54,7 @@ const router = Router();
 
 /**
  * @swagger
- * /products/add-products/{category_id}:
+ * /products/add-products/{category_id}/:
  *   post:
  *     tags:
  *      - Products
@@ -127,7 +127,7 @@ const router = Router();
 
 router.get("/get-products/", get_products);
 
-router.get("/get-categories-products/:id/", get_category_products);
+router.get("/get-categories-products/:category_id/", get_category_products);
 
 router.post(
   "/add-products/:category_id",
