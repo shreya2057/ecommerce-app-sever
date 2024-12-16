@@ -35,7 +35,7 @@ const router = Router();
 
 /**
  * @swagger
- * /products/get-categories-products/:
+ * /products/get-categories-products/{category_id}:
  *   get:
  *     tags:
  *      - Products
@@ -127,7 +127,7 @@ const router = Router();
 
 router.get("/get-products/", get_products);
 
-router.get("/get-categories-products/", get_category_products);
+router.get("/get-categories-products/:id/", get_category_products);
 
 router.post(
   "/add-products/:category_id",
