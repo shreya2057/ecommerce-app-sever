@@ -6,7 +6,7 @@ import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { options } from "./config/swagger";
 import categories_routes from "./routes/categories";
-import product_routes from "./routes/products_routes";
+import product_routes from "./routes/products";
 import auth_routes from "./routes/auth";
 import bodyParser from "body-parser";
 
