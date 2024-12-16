@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import mongoose from "mongoose";
-import cloudinary from "../config/cloudinary";
-import { Categories } from "../model/products";
-import { Product } from "../model/products";
+import cloudinary from "../../config/cloudinary";
+import { Categories } from "../../model/products";
+import { Product } from "../../model/products";
+import { errorResponse, sendResponse } from "../../utils/response";
 
 const get_products = async (req: Request, res: Response) => {
   try {
@@ -39,35 +40,23 @@ const post_products = async (req: Request, res: Response) => {
         folder: `category_${req.params.category_id}`,
       },
     );
-
     const ObjectId = mongoose.Types.ObjectId;
-
-    const findCategory = await Categories.findOne({
+    const categoryExists = await Categories.exists({
       _id: new ObjectId(req.params.category_id),
     });
-    if (!!findCategory) {
-      const request = new Product({
-        ...req?.body,
-        image: cloudinaryResult?.secure_url,
-        category_id: req.params.category_id,
-        category_name: findCategory?.name,
-      });
+    if (!categoryExists)
+      return sendResponse(res, "Category instance not found", 400);
+    const request = new Product({
+      ...req?.body,
+      image: cloudinaryResult?.secure_url,
+      category_id: new ObjectId(req.params.category_id),
+    });
 
-      await request.save();
-      res.json({
-        message: "Products created successfully",
-        status: 200,
-        data: request,
-      });
-    } else {
-      res.json({
-        message: "Category instance not found",
-        status: 400,
-      });
-    }
+    await request.save();
+    return sendResponse(res, "Product created successfully", 200, request);
   } catch (e) {
     console.log(e);
-    res.json({ message: "Internal server error", status: 500 });
+    return errorResponse(res);
   }
 };
 
