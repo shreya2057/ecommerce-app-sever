@@ -41,9 +41,29 @@ const get_categories = async (_: Request, res: Response) => {
 
 const get_all_categories = async (_: Request, res: Response) => {
   try {
-    const response = await Categories.find({
-      is_deleted: false,
-    });
+    const response = await Categories.aggregate([
+      {
+        $match: { is_deleted: false },
+      },
+      {
+        $lookup: {
+          from: "products",
+          localField: "_id",
+          foreignField: "category_id",
+          as: "category_products",
+        },
+      },
+      {
+        $addFields: {
+          no_of_products: { $size: "$category_products" },
+        },
+      },
+      {
+        $project: {
+          category_products: 0,
+        },
+      },
+    ]);
     return sendResponse(
       res,
       "Categories data fetch successfully",

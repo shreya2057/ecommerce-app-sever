@@ -6,8 +6,7 @@ const productSchema = new mongoose.Schema({
   description: { type: String, required: true },
   image: { type: String, required: true },
   discount: { type: String, required: true },
-  category_id: { type: String, required: true },
-  category_name: { type: String, required: true },
+  category_id: { type: mongoose.Schema.Types.ObjectId, required: true },
   is_featured: { type: Boolean, required: true },
 });
 

@@ -5,7 +5,7 @@ import {
   get_products,
   get_products_details,
   post_products,
-} from "../controller/products_controller";
+} from "../controller/products";
 
 const router = Router();
 
