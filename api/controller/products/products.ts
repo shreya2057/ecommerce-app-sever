@@ -30,6 +30,18 @@ const get_products = async (req: Request, res: Response) => {
   }
 };
 
+const get_category_products = async (req: Request, res: Response) => {
+  try {
+    const request = await Product.find({
+      category_id: req?.query?.category_id,
+    });
+    sendResponse(res, "Products data fetch successfully", 200, request);
+  } catch (e) {
+    console.log(e);
+    errorResponse(res);
+  }
+};
+
 const post_products = async (req: Request, res: Response) => {
   try {
     const cloudinaryResult = await cloudinary.uploader.upload(
@@ -98,4 +110,5 @@ export {
   post_products,
   get_featured_products,
   get_products_details,
+  get_category_products,
 };
