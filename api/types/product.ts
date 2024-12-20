@@ -10,10 +10,10 @@ export type CategoryType = {
 
 export type ProductType = {
   title: string;
-  price: string;
+  price: number;
   description: string;
   image: string;
-  discount: string;
+  discount: number;
   category_id: mongoose.Schema.Types.ObjectId;
   is_featured: boolean;
 };
