@@ -19,14 +19,10 @@ const get_products = async (req: Request, res: Response) => {
               category_id: req?.query?.category_id,
             }),
     );
-    res.json({
-      message: "Products data fetch successfully",
-      status: 200,
-      data: request,
-    });
+    return sendResponse(res, "Products data fetch successfully", 200, request);
   } catch (e) {
     console.log(e);
-    res.json({ message: "Internal server error", status: 500 });
+    return errorResponse(res);
   }
 };
 
@@ -36,10 +32,10 @@ const get_category_products = async (req: Request, res: Response) => {
     const request = await Product.find({
       category_id: new ObjectId(req?.params?.category_id),
     });
-    sendResponse(res, "Products data fetch successfully", 200, request);
+    return sendResponse(res, "Products data fetch successfully", 200, request);
   } catch (e) {
     console.log(e);
-    errorResponse(res);
+    return errorResponse(res);
   }
 };
 
@@ -65,7 +61,6 @@ const post_products = async (req: Request, res: Response) => {
       category_id: new ObjectId(req.params.category_id),
       is_featured: false,
     });
-
     await request.save();
     return sendResponse(res, "Product created successfully", 200, request);
   } catch (e) {
@@ -93,17 +88,56 @@ const get_products_details = async (req: Request, res: Response) => {
     const productExists = await Product.exists({ _id: req?.params?.id });
     if (productExists) {
       const productDetail = await Product.findOne({ _id: req?.params?.id });
-      res.json({
-        message: "Product detail fetched successfully",
-        status: 200,
-        data: productDetail,
-      });
+      return sendResponse(
+        res,
+        "Product detail fetched successfully",
+        200,
+        productDetail,
+      );
     } else {
-      res.json({ message: "Product instance not found", status: 400 });
+      return sendResponse(res, "Product instance not found", 400);
     }
   } catch (e) {
     console.log(e);
-    res.json({ message: "Internal server error", status: 500 });
+    return errorResponse(res);
+  }
+};
+
+const edit_products_details = async (req: Request, res: Response) => {
+  try {
+    const product = await Product.findOne({ _id: req?.params?.id });
+    if (!product) return sendResponse(res, "Product instance not found", 400);
+    const category_id = product?.category_id.toString();
+    const public_id = product?.image.split("/").pop()?.split(".")[0];
+    let cloudinaryResult;
+    if (req.file) {
+      cloudinaryResult = await cloudinary.uploader.upload(
+        `data:${req?.file?.mimetype};base64,${req?.file?.buffer.toString(
+          "base64",
+        )}`,
+        {
+          folder: `category_${category_id}`,
+          public_id,
+        },
+      );
+    }
+    const productDetail = await Product.findOneAndUpdate(
+      { _id: req?.params?.id },
+      {
+        ...req?.body,
+        ...(cloudinaryResult && { image: cloudinaryResult.secure_url }),
+      },
+      { new: true, runValidators: false },
+    );
+    return sendResponse(
+      res,
+      "Product detail edited successfully",
+      200,
+      productDetail,
+    );
+  } catch (e) {
+    console.log(e);
+    return errorResponse(res);
   }
 };
 
@@ -113,4 +147,5 @@ export {
   get_featured_products,
   get_products_details,
   get_category_products,
+  edit_products_details,
 };

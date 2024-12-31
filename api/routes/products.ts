@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { upload } from "../config/mutler";
 import {
+  edit_products_details,
   get_category_products,
   get_featured_products,
   get_products,
@@ -125,6 +126,24 @@ const router = Router();
  *         description: A successful response
  */
 
+/**
+ * @swagger
+ * /products/product-detail/{id}/:
+ *   patch:
+ *     tags:
+ *      - Products
+ *     summary: Edit Product detail
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         description: The product id
+ *     responses:
+ *       200:
+ *         description: A successful response
+ */
+
 router.get("/get-products/", get_products);
 
 router.get("/get-categories-products/:category_id/", get_category_products);
@@ -137,5 +156,10 @@ router.post(
 
 router.get("/featured-products/", get_featured_products);
 router.get("/product-detail/:id/", get_products_details);
+router.patch(
+  "/product-detail/:id/",
+  upload.single("image"),
+  edit_products_details,
+);
 
 export default router;
