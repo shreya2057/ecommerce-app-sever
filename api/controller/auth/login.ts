@@ -36,12 +36,13 @@ export const login_controller = async (req: Request, res: Response) => {
           expiresIn: 60 * 7,
         });
         const refresh_token = jwt.sign(tokenDetails, refresh_key, {
-          expiresIn: 60 * 7,
+          expiresIn: "10d",
         });
 
         return sendResponse(res, "Logged in Successfully", 200, {
           access_token,
           refresh_token,
+          role: user?.role,
         });
       } else {
         return sendResponse(res, "Incorrect user credentials", 401);
