@@ -8,6 +8,7 @@ import { options } from "./config/swagger";
 import categories_routes from "./routes/categories";
 import product_routes from "./routes/products";
 import auth_routes from "./routes/auth";
+import cart_routes from "./routes/carts";
 import bodyParser from "body-parser";
 
 const app = express();
@@ -40,6 +41,7 @@ app.use(
 app.use("/categories", categories_routes);
 app.use("/products", product_routes);
 app.use("/users", auth_routes);
+app.use("/carts", cart_routes);
 
 app.listen(port, () => {
   console.log(`Backend: Running in port ${port}`);
