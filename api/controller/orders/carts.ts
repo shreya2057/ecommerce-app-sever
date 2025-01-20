@@ -4,7 +4,7 @@ import { Product } from "../../model/products";
 import { Cart } from "../../model/orders";
 import mongoose from "mongoose";
 
-const add_to_cart = async (req: Request, res: Response) => {
+export const add_to_cart = async (req: Request, res: Response) => {
   try {
     const productExists = await Product.exists({ _id: req?.body?.product });
     if (!productExists)
@@ -12,6 +12,8 @@ const add_to_cart = async (req: Request, res: Response) => {
     const ObjectId = mongoose.Types.ObjectId;
     const carts = new Cart({
       product: ObjectId.createFromHexString(req.body.product),
+      number: req?.body?.number,
+      user: ObjectId.createFromHexString(req?.body?.user),
     });
     await carts.save();
     return sendResponse(res, "Items added to cart successfully", 200, carts);
@@ -20,5 +22,3 @@ const add_to_cart = async (req: Request, res: Response) => {
     errorResponse(res);
   }
 };
-
-export { add_to_cart };
