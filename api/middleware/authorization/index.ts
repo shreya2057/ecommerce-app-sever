@@ -13,12 +13,13 @@ export const authorizeUser = (
     const access_key = process.env.access_secretKey ?? "";
     const header = req?.headers?.authorization;
     const token = header && header?.split(" ")[1];
-    if (!token) return sendResponse(res, "Unauthenicated user", 401);
+    if (!token) return sendResponse(res, "Token cannot be empty", 400);
     jwt.verify(token, access_key, async function (err, decoded) {
-      if (err) return sendResponse(res, "Invalid token", 403);
+      if (err) return sendResponse(res, "Unauthenicated user", 401);
       const user = decoded as JwtPayloadWithId;
       const user_data = await User.findOne({ _id: user?.id });
-      if (!user_data?.is_active) return sendResponse(res, "Invalid token", 403);
+      if (!user_data?.is_active)
+        return sendResponse(res, "User does not exists", 404);
       req.body.user = user?.id;
       next();
     });
