@@ -31,9 +31,6 @@ export const login_controller = async (req: Request, res: Response) => {
           name: user?.full_name,
           role: user?.role,
         };
-
-        console.log(tokenDetails);
-
         const access_token = jwt.sign(tokenDetails, access_key, {
           expiresIn: 60 * 7,
         });
