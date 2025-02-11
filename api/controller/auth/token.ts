@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { errorResponse, sendResponse } from "../../utils/response";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { JwtPayloadWithId } from "../../types/jwt";
+import mongoose from "mongoose";
 
 export const refresh_token_controller = (req: Request, res: Response) => {
   try {
@@ -19,10 +20,17 @@ export const refresh_token_controller = (req: Request, res: Response) => {
           console.log(err);
           return sendResponse(res, "Invalid refresh token", 400);
         }
-
         const user = decoded as JwtPayloadWithId;
-        const access_token = jwt.sign({ _id: user.id }, access_key, {
-          expiresIn: "7m",
+
+        const ObjectId = mongoose.Types.ObjectId;
+        const tokenDetails = {
+          email: user?.email,
+          id: ObjectId.createFromHexString(user?.id),
+          name: user?.full_name,
+          role: user?.role,
+        };
+        const access_token = jwt.sign(tokenDetails, access_key, {
+          expiresIn: 60 * 7,
         });
 
         return sendResponse(res, "Token refreshed successfully", 200, {

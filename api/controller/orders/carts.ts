@@ -22,3 +22,15 @@ export const add_to_cart = async (req: Request, res: Response) => {
     errorResponse(res);
   }
 };
+
+export const get_cart_count = async (req: Request, res: Response) => {
+  try {
+    const carts = await Cart.find({ user: req?.body?.user });
+    return sendResponse(res, "Cart count", 200, {
+      total_count: carts?.length ?? 0,
+    });
+  } catch (e) {
+    console.log(e);
+    errorResponse(res);
+  }
+};
