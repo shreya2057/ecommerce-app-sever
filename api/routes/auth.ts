@@ -8,6 +8,7 @@ import {
   login_controller,
   otp_send_controller,
   otp_verify_controller,
+  refresh_token_controller,
   register_controller,
 } from "../controller/auth";
 
@@ -48,6 +49,26 @@ import {
 
 /**
  * @swagger
+ * /users/refresh-token/:
+ *   post:
+ *     tags:
+ *      - Users
+ *     summary: Refresh Token
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             properties:
+ *               refresh:
+ *                 type: string
+ *                 required: true
+ *     responses:
+ *       200:
+ *         description: A successful response
+ */
+
+/**
+ * @swagger
  * /users/login/:
  *   post:
  *     tags:
@@ -58,10 +79,22 @@ import {
  *         application/json:
  *           schema:
  *             properties:
+ *               full_name:
+ *                 type: string
+ *                 required: true
  *               email:
  *                 type: string
  *                 required: true
+ *               phone_number:
+ *                 type: string
+ *                 required: true
  *               password:
+ *                 type: string
+ *                 required: true
+ *               confirm_password:
+ *                 type: string
+ *                 required: true
+ *               date_of_birth:
  *                 type: string
  *                 required: true
  *     responses:
@@ -119,5 +152,7 @@ router.post("/login", login_validation, login_controller);
 
 router.post("/send-otp/", otp_validation, otp_send_controller);
 router.post("/verify-otp/", otp_validation, otp_verify_controller);
+
+router.post("/refresh-token/", refresh_token_controller);
 
 export default router;
